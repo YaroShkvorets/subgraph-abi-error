@@ -1,0 +1,44 @@
+specVersion: 0.0.4
+schema:
+  file: ./schema.graphql
+dataSources:
+- kind: ethereum
+  name: punks
+  network: mainnet
+  source:
+    abi: Punks
+    startBlock: 18434892
+  mapping:
+    kind: ethereum/events
+    apiVersion: 0.0.6
+    language: wasm/assemblyscript
+    entities:
+      - Punk
+    abis:
+      - name: Punks
+        file: ./abis/punks.json
+      - name: IERC721
+        file: node_modules/@openzeppelin/contracts/build/contracts/IERC721Metadata.json
+    eventHandlers:
+      - event: PunkTransfer(indexed address,indexed address,uint256)
+        handler: handlePunkTransfer
+    file: ./src/punks.ts
+- kind: ethereum
+  name: beanz
+  network: mainnet
+  source:
+    abi: Beanz
+    startBlock: 18434892
+  mapping:
+    kind: ethereum/events
+    apiVersion: 0.0.6
+    language: wasm/assemblyscript
+    entities:
+      - Bean
+    abis:
+      - name: Beanz
+        file: ./abis/beanz.json
+    eventHandlers:
+      - event: Transfer(indexed address,indexed address,indexed uint256)
+        handler: handleTransfer
+    file: ./src/beanz.ts

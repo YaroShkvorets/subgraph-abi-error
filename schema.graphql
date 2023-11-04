@@ -1,0 +1,13 @@
+type Punk @entity {
+id: ID!
+name: String!
+number: BigInt!
+uri: String
+}
+
+type Bean @entity {
+id: ID!
+name: String!
+number: BigInt!
+uri: String
+}
